@@ -23,22 +23,19 @@ public class Person {
     @Column(nullable = false)
     private String email;
     private String bio;
+    @Column(nullable = false)
     private String username;
+    @Column(nullable = false)
     private String password;
 
     @ElementCollection(targetClass = ERole.class)
     @CollectionTable(name = "person_role", joinColumns = @JoinColumn(name = "person_id"))
     private Set<ERole> roles = new HashSet<>();
-
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "person")
     private List<Post> posts = new ArrayList<>();
-
     @JsonFormat(pattern = "yyyy-mm-dd HH:mm:ss")
     @Column(updatable = false)
     private LocalDateTime createdDate;
-
-    @Transient
-    private Collection<? extends GrantedAuthority> authorities;
 
     @PrePersist
     protected void onCreate(){

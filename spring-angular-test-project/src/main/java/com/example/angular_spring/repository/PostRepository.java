@@ -10,6 +10,6 @@ import java.util.List;
 @Repository
 public interface PostRepository extends JpaRepository<Post, Long> {
     List<Post> findAllByPersonOrderByCreatedDateDesc(Person person);
-    List<Post> findAllByOrOrderByCreatedDateDesc();
+    List<Post> findAllByOrderByCreatedDateDesc();
     List<Post> findPostByIdAndPerson(Long postId, Person person);
 }
