@@ -33,11 +33,11 @@ public class SecurityConfig {
 
     @Bean
     public SecurityFilterChain httpSecurity(HttpSecurity httpSecurity) throws Exception {
-        return httpSecurity.csrf().disable()
+        return httpSecurity.cors().and().csrf().disable()
                 .exceptionHandling().authenticationEntryPoint(authenticationEntryPoint)
                 .and()
                 .authorizeHttpRequests()
-                .requestMatchers("/api/auth").permitAll()
+                .requestMatchers("/api/auth/**").permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .sessionManagement()

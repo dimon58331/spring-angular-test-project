@@ -1,10 +1,8 @@
 package com.example.angular_spring.config;
 
 import com.auth0.jwt.exceptions.JWTVerificationException;
-import com.example.angular_spring.entity.Person;
 import com.example.angular_spring.security.PersonDetails;
 import com.example.angular_spring.service.PersonDetailsService;
-import com.example.angular_spring.util.ERole;
 import com.example.angular_spring.util.JWTUtil;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
@@ -13,14 +11,17 @@ import jakarta.servlet.http.HttpServletResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.web.authentication.WebAuthenticationDetails;
+import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import java.io.IOException;
-import java.util.Collections;
 
 @Component
 public class JWTFilter extends OncePerRequestFilter {
@@ -47,15 +48,17 @@ public class JWTFilter extends OncePerRequestFilter {
 
                 UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(
                         personDetails, personDetails.getPassword(), personDetails.getAuthorities());
-                if (SecurityContextHolder.getContext().getAuthentication() == null){
-                    SecurityContextHolder.getContext().setAuthentication(authenticationToken);
-                }
+
+                authenticationToken.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
+                SecurityContextHolder.getContext().setAuthentication(authenticationToken);
 
             } catch (JWTVerificationException exception){
                 logger.atError().log("JWT token isn't valid");
             }
         }
 
+
+        logger.atInfo().log("Before do filter");
         filterChain.doFilter(request, response);
     }
 }

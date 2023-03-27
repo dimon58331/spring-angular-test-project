@@ -23,22 +23,36 @@ public class Person {
     @Column(nullable = false)
     private String email;
     private String bio;
-    @Column(nullable = false)
+    @Column(unique = true)
     private String username;
     @Column(nullable = false)
     private String password;
 
-    @ElementCollection(targetClass = ERole.class)
+    @ElementCollection(targetClass = ERole.class, fetch = FetchType.EAGER)
     @CollectionTable(name = "person_role", joinColumns = @JoinColumn(name = "person_id"))
     private Set<ERole> roles = new HashSet<>();
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "person")
     private List<Post> posts = new ArrayList<>();
-    @JsonFormat(pattern = "yyyy-mm-dd HH:mm:ss")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     @Column(updatable = false)
     private LocalDateTime createdDate;
 
     @PrePersist
     protected void onCreate(){
         this.createdDate = LocalDateTime.now();
+    }
+
+    @Override
+    public String toString() {
+        return "Person{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", surname='" + surname + '\'' +
+                ", email='" + email + '\'' +
+                ", bio='" + bio + '\'' +
+                ", username='" + username + '\'' +
+                ", password='" + password + '\'' +
+                ", createdDate=" + createdDate +
+                '}';
     }
 }
