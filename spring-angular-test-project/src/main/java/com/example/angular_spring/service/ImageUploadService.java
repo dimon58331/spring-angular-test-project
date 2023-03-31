@@ -68,7 +68,7 @@ public class ImageUploadService {
         return imageModelRepository.save(newPostImage);
     }
 
-    public ImageModel findImageToPerson(Principal principal){
+    public ImageModel getPersonImage(Principal principal){
         Person person = getPersonByPrincipal(principal);
         ImageModel imageModel = imageModelRepository.findByPersonId(person.getId())
                 .orElseThrow(() -> new ImageModelNotFoundException("Image cannot be found"));
@@ -77,7 +77,7 @@ public class ImageUploadService {
         return imageModel;
     }
 
-    public ImageModel findImageToPost(Long postId){
+    public ImageModel getPostImage(Long postId){
         Post post = postRepository.findById(postId).orElseThrow(() -> new PostNotFoundException("Post cannot be found"));
         ImageModel imageModel = imageModelRepository.findByPostId(post.getId())
                 .orElseThrow(() -> new ImageModelNotFoundException("Image cannot be found"));
