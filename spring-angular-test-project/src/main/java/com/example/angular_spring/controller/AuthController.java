@@ -34,7 +34,7 @@ public class AuthController {
     private final JWTUtil jwtUtil;
     private final ModelMapper modelMapper;
     private final PersonService personService;
-    private final Logger logger = LoggerFactory.getLogger(AuthController.class);
+    private final Logger LOG = LoggerFactory.getLogger(AuthController.class);
 
     @Autowired
     public AuthController(AuthenticationManager authenticationManager, ResponseErrorValidation responseErrorValidation, JWTUtil jwtUtil, ModelMapper modelMapper, PersonService personService) {

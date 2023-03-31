@@ -1,6 +1,5 @@
 package com.example.angular_spring.payload.request;
 
-import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Size;
 import lombok.Data;

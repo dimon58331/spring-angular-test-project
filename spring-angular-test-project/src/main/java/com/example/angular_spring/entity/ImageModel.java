@@ -2,9 +2,11 @@ package com.example.angular_spring.entity;
 
 import jakarta.persistence.*;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import net.minidev.json.annotate.JsonIgnore;
 
 @Data
+@NoArgsConstructor
 @Entity
 public class ImageModel {
     @Id

@@ -4,14 +4,15 @@ import com.example.angular_spring.util.ERole;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
 
 import java.time.LocalDateTime;
 import java.util.*;
 
 @Data
+@NoArgsConstructor
 @Entity
-@Table(name = "Person")
 public class Person {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -23,7 +24,7 @@ public class Person {
     @Column(nullable = false)
     private String email;
     private String bio;
-    @Column(unique = true)
+    @Column(unique = true, nullable = false, updatable = false)
     private String username;
     @Column(nullable = false)
     private String password;
