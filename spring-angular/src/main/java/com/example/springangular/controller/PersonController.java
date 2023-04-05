@@ -62,7 +62,7 @@ public class PersonController {
 
         return new ResponseEntity<>(updatedPersonDTO, HttpStatus.OK);
     }
-    
+
     public PersonDTO convertPersonToPersonDTO(Person person){
         return modelMapper.map(person, PersonDTO.class);
     }
