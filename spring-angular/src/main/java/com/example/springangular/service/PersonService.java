@@ -1,9 +1,11 @@
 package com.example.springangular.service;
 
-import com.example.angular_spring.entity.Person;
-import com.example.angular_spring.exception.UserExistsException;
-import com.example.angular_spring.repository.PersonRepository;
-import com.example.angular_spring.util.ERole;
+import com.example.springangular.dto.PersonDTO;
+import com.example.springangular.entity.Person;
+import com.example.springangular.exception.PersonExistsException;
+import com.example.springangular.exception.PersonNotFoundException;
+import com.example.springangular.repository.PersonRepository;
+import com.example.springangular.util.ERole;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,13 +38,22 @@ public class PersonService {
             personRepository.save(person);
         } catch(Exception e){
             LOG.atError().log("Throwing exception");
-            throw new UserExistsException("The user " + person.getUsername() + " already exists.");
+            throw new PersonExistsException("The user " + person.getUsername() + " already exists.");
         }
     }
 
     @Transactional
-    public void updatePerson(Person person){
-        personRepository.save(person);
+    public Person updatePerson(PersonDTO personDTO, Principal principal){
+        Person person = getPersonByPrincipal(principal);
+        person.setName(personDTO.getName());
+        person.setSurname(personDTO.getSurname());
+        person.setEmail(personDTO.getEmail());
+        person.setBio(personDTO.getBio());
+        person.setUsername(personDTO.getUsername());
+
+        LOG.info(person.toString());
+
+        return person;
     }
 
     public Person getCurrentPerson(Principal principal){
@@ -55,4 +66,7 @@ public class PersonService {
                 .orElseThrow(() -> new UsernameNotFoundException("User with username '" + username + "' not found"));
     }
 
+    public Person findPersonById(Long personId) {
+        return personRepository.findById(personId).orElseThrow(()-> new PersonNotFoundException("Person not be found"));
+    }
 }

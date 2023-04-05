@@ -1,13 +1,13 @@
 package com.example.springangular.service;
 
-import com.example.angular_spring.entity.ImageModel;
-import com.example.angular_spring.entity.Person;
-import com.example.angular_spring.entity.Post;
-import com.example.angular_spring.exception.ImageModelNotFoundException;
-import com.example.angular_spring.exception.PostNotFoundException;
-import com.example.angular_spring.repository.ImageModelRepository;
-import com.example.angular_spring.repository.PersonRepository;
-import com.example.angular_spring.repository.PostRepository;
+import com.example.springangular.entity.ImageModel;
+import com.example.springangular.entity.Person;
+import com.example.springangular.entity.Post;
+import com.example.springangular.exception.ImageModelNotFoundException;
+import com.example.springangular.exception.PostNotFoundException;
+import com.example.springangular.repository.ImageModelRepository;
+import com.example.springangular.repository.PersonRepository;
+import com.example.springangular.repository.PostRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

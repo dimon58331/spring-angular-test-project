@@ -24,7 +24,7 @@ import java.io.IOException;
 public class JWTFilter extends OncePerRequestFilter {
     private final JWTUtil jwtUtil;
     private final PersonDetailsService personDetailsService;
-    private final Logger LOG = LoggerFactory.getLogger(this.getClass().getName());
+    private static final Logger LOG = LoggerFactory.getLogger(JWTFilter.class);
 
     @Autowired
     public JWTFilter(JWTUtil jwtUtil, PersonDetailsService personDetailsService) {

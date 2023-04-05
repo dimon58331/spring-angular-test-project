@@ -1,8 +1,8 @@
 package com.example.springangular.service;
 
-import com.example.angular_spring.entity.Person;
-import com.example.angular_spring.repository.PersonRepository;
-import com.example.angular_spring.security.PersonDetails;
+import com.example.springangular.entity.Person;
+import com.example.springangular.repository.PersonRepository;
+import com.example.springangular.security.PersonDetails;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
