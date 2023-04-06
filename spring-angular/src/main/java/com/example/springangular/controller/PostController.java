@@ -2,6 +2,7 @@ package com.example.springangular.controller;
 
 import com.example.springangular.dto.PostDTO;
 import com.example.springangular.entity.Post;
+import com.example.springangular.payload.response.MessageResponse;
 import com.example.springangular.service.PostService;
 import com.example.springangular.validator.ResponseErrorValidation;
 import jakarta.validation.Valid;
@@ -13,6 +14,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
+import java.util.List;
 import java.util.Objects;
 
 @RestController
@@ -40,7 +42,36 @@ public class PostController {
 
         return new ResponseEntity<>(createdPostDTO, HttpStatus.OK);
     }
-    
+
+    @GetMapping("/all")
+    public ResponseEntity<List<PostDTO>> getAllPosts(){
+        List<PostDTO> postDTOList = postService.findAllPosts().stream().map(this::convertPostToPostDTO).toList();
+        return new ResponseEntity<>(postDTOList, HttpStatus.OK);
+    }
+
+    @GetMapping("/user/posts")
+    public ResponseEntity<List<PostDTO>> getAllPostsForPerson(Principal principal){
+        List<PostDTO> postDTOList = postService.findAllPostsForPerson(principal).stream()
+                .map(this::convertPostToPostDTO).toList();
+        return new ResponseEntity<>(postDTOList, HttpStatus.OK);
+    }
+
+    @PostMapping("/{postId}/{username}/like")
+    public ResponseEntity<PostDTO> likePost(@PathVariable("postId") String postId,
+                                            @PathVariable("username") String username){
+        Post post = postService.likePost(Long.parseLong(postId), username);
+        PostDTO postDTO = convertPostToPostDTO(post);
+
+        return new ResponseEntity<>(postDTO, HttpStatus.OK);
+    }
+
+    @PostMapping("/{postId}/delete")
+    public ResponseEntity<MessageResponse> deletePost(@PathVariable("postId") String postId, Principal principal){
+        postService.deletePost(Long.parseLong(postId), principal);
+        return new ResponseEntity<>(new MessageResponse("Post was deleted successfully"), HttpStatus.OK);
+    }
+
+
     public Post convertPostDTOToPost(PostDTO postDTO){
         return modelMapper.map(postDTO, Post.class);
     }

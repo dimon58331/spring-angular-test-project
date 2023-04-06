@@ -74,6 +74,10 @@ public class PostService {
         imageModel.ifPresent(imageModelRepository::delete);
     }
 
+    public List<Post> findAllPosts(){
+        return  postRepository.findAll();
+    }
+
     private Person getPersonByPrincipal(Principal principal){
         Optional<Person> person = personRepository.findPersonByUsername(principal.getName());
         return person.orElseThrow(() -> new UsernameNotFoundException("User with this username not found"));

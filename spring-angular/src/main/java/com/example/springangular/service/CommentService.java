@@ -4,6 +4,7 @@ package com.example.springangular.service;
 import com.example.springangular.entity.Comment;
 import com.example.springangular.entity.Person;
 import com.example.springangular.entity.Post;
+import com.example.springangular.exception.CommentNotFoundException;
 import com.example.springangular.exception.PostNotFoundException;
 import com.example.springangular.repository.CommentRepository;
 import com.example.springangular.repository.PersonRepository;
@@ -40,6 +41,13 @@ public class CommentService {
         comment.setPost(post);
 
         return commentRepository.save(comment);
+    }
+
+    @Transactional
+    public void deleteComment(Long commentId){
+        Comment comment = commentRepository.findById(commentId)
+                .orElseThrow(() -> new CommentNotFoundException("Comment not be found"));
+        commentRepository.delete(comment);
     }
 
     public List<Comment> findAllCommentsByPost(Long postId){
