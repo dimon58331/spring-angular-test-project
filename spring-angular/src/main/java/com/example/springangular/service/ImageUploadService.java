@@ -39,6 +39,7 @@ public class ImageUploadService {
         this.postRepository = postRepository;
     }
 
+    @Transactional
     public ImageModel uploadImageToPerson(MultipartFile file, Principal principal) throws IOException {
         Person person = getPersonByPrincipal(principal);
         Optional<ImageModel> userProfileImage = imageModelRepository.findByPersonId(person.getId());
@@ -52,6 +53,7 @@ public class ImageUploadService {
         return imageModelRepository.save(newUserProfileImage);
     }
 
+    @Transactional
     public ImageModel uploadImageToPost(MultipartFile file, Long postId) throws IOException{
         Post post = postRepository.findById(postId)
                 .orElseThrow(() -> new PostNotFoundException("Post cannot be found"));

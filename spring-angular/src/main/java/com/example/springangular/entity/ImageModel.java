@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import net.minidev.json.annotate.JsonIgnore;
+import org.hibernate.annotations.Type;
 
 @Data
 @NoArgsConstructor
@@ -14,7 +15,6 @@ public class ImageModel {
     private Long id;
     @Column(nullable = false)
     private String name;
-    @Lob
     @Column(columnDefinition = "BYTEA")
     private byte[] imageBytes;
     @JsonIgnore

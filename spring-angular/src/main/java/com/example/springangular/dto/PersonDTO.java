@@ -12,8 +12,6 @@ public class PersonDTO {
     private String surname;
     @NotEmpty
     private String email;
-    @NotEmpty
     private String bio;
-    @NotEmpty
     private String username;
 }

@@ -43,7 +43,7 @@ public class ImageUploadController {
         ImageModel personImage = imageUploadService.getPersonImage(principal);
         return new ResponseEntity<>(personImage, HttpStatus.OK);
     }
-    
+
     @GetMapping("/{postId}/image")
     public ResponseEntity<ImageModel> getImageToPost(@PathVariable("postId") String postId){
         ImageModel postImage = imageUploadService.getPostImage(Long.parseLong(postId));

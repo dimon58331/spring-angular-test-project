@@ -13,8 +13,10 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.StringUtils;
 
 import java.security.Principal;
+import java.util.Objects;
 
 @Service
 @Transactional(readOnly = true)
@@ -49,8 +51,9 @@ public class PersonService {
         person.setSurname(personDTO.getSurname());
         person.setEmail(personDTO.getEmail());
         person.setBio(personDTO.getBio());
-        person.setUsername(personDTO.getUsername());
-
+        if (Objects.nonNull(personDTO.getUsername())){
+            person.setUsername(personDTO.getUsername());
+        }
         LOG.info(person.toString());
 
         return person;
