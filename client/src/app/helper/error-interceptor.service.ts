@@ -1,8 +1,15 @@
 import { Injectable } from '@angular/core';
-import {HTTP_INTERCEPTORS, HttpEvent, HttpHandler, HttpInterceptor, HttpRequest} from "@angular/common/http";
+import {
+  HTTP_INTERCEPTORS,
+  HttpErrorResponse,
+  HttpEvent,
+  HttpHandler,
+  HttpInterceptor,
+  HttpRequest
+} from "@angular/common/http";
 import {TokenStorageService} from "../service/token-storage.service";
 import {NotificationService} from "../service/notification.service";
-import {catchError, Observable, throwError} from "rxjs";
+import {catchError, Observable, throwError, throwIfEmpty} from "rxjs";
 
 @Injectable({
   providedIn: 'root'
@@ -16,15 +23,15 @@ export class ErrorInterceptorService implements HttpInterceptor{
     return next.handle(req).pipe(catchError(err => {
       if (err.status === 401){
         this.tokenService.logOut();
-        //window.location.reload();
+        window.location.reload();
       }
       const error = err.error.message || err.statusText;
       this.notificationService.showSnackBar(error);
       return throwError(error);
-    }))
+    }));
   }
 }
 
 export const authErrorInterceptorProvider = [
-  {provide: HTTP_INTERCEPTORS, userClass: ErrorInterceptorService, multi: true}
+  {provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptorService, multi: true}
 ];
