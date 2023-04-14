@@ -51,9 +51,11 @@ public class AuthController {
         ResponseEntity<Object> errors = responseErrorValidation.mapValidationService(result);
         if (Objects.nonNull(errors)) return errors;
 
+        LOG.info("Before authenticate");
         Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(
                 authenticationRequest.getUsername(), authenticationRequest.getPassword()
         ));
+        LOG.info("After authenticate");
 
         SecurityContextHolder.getContext().setAuthentication(authentication);
 

@@ -20,14 +20,13 @@ export class ErrorInterceptorService implements HttpInterceptor{
               private notificationService: NotificationService) { }
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
+    console.log('check request on errors');
     return next.handle(req).pipe(catchError(err => {
       if (err.status === 401){
-        this.tokenService.logOut();
-        window.location.reload();
+        console.log(err)
       }
-      const error = err.error.message || err.statusText;
-      this.notificationService.showSnackBar(error);
-      return throwError(error);
+      this.notificationService.showSnackBar(err.error.username + '\n' + err.error.password);
+      return throwError(err);
     }));
   }
 }
