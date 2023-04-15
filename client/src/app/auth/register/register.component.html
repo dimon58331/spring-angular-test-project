@@ -15,7 +15,10 @@
         <mat-form-field appearance="outline">
           <mat-label>Email</mat-label>
           <input matInput formControlName="email">
-          <mat-error *ngIf="registerForm.hasError('required', 'email')">
+          <mat-error *ngIf="registerForm.hasError( 'email', 'email')">
+            Email must be correct (test@test)
+          </mat-error>
+          <mat-error *ngIf="registerForm.hasError( 'required', 'email')">
             Email cannot be empty
           </mat-error>
         </mat-form-field>

@@ -12,7 +12,7 @@ import {authErrorInterceptorProvider} from "./helper/error-interceptor.service";
 import { LoginComponent } from './auth/login/login.component';
 import { RegisterComponent } from './auth/register/register.component';
 import { LogoutComponent } from './auth/logout/logout.component';
-import { MainComponent } from './menu/main/main.component';
+import { NavigationComponent } from './layout/navigation/navigation.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +20,7 @@ import { MainComponent } from './menu/main/main.component';
     LoginComponent,
     RegisterComponent,
     LogoutComponent,
-    MainComponent,
+    NavigationComponent
   ],
   imports: [
     BrowserModule,

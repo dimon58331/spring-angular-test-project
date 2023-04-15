@@ -4,6 +4,7 @@ import {NotificationService} from "../../service/notification.service";
 import {Router} from "@angular/router";
 import {AbstractControl, FormBuilder, FormGroup, ValidationErrors, ValidatorFn, Validators} from "@angular/forms";
 import {MyErrorStateMatcher} from "./validator/password-matcher";
+import {TokenStorageService} from "../../service/token-storage.service";
 
 @Component({
   selector: 'app-register',
@@ -15,13 +16,18 @@ export class RegisterComponent {
   public matcher = new MyErrorStateMatcher();
   constructor(
     private authService: AuthService,
+    private tokenStorage: TokenStorageService,
     private notificationService: NotificationService,
     private router: Router,
     private formBuilder: FormBuilder
   ) {
+    if (this.tokenStorage.getUser()){
+      this.router.navigate(['main']);
+    }
+
     this.registerForm = this.formBuilder.group({
       username: ['', Validators.compose([Validators.required])],
-      email: ['', Validators.compose([Validators.required])],
+      email: ['', Validators.compose([Validators.required, Validators.email])],
       name: ['', Validators.compose([Validators.required])],
       surname: ['', Validators.compose([Validators.required])],
       password: ['', Validators.compose([Validators.required])],

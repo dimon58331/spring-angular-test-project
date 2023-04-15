@@ -3,14 +3,15 @@ import { RouterModule, Routes } from '@angular/router';
 import {LoginComponent} from "./auth/login/login.component";
 import {RegisterComponent} from "./auth/register/register.component";
 import {LogoutComponent} from "./auth/logout/logout.component";
-import {MainComponent} from "./menu/main/main.component";
-import {AuthService} from "./service/auth.service";
+import {AuthGuardService} from "./helper/auth-guard.service";
+import {NavigationComponent} from "./layout/navigation/navigation.component";
 
 const routes: Routes = [
+  {path: '', redirectTo: '/login', pathMatch: 'full'},
   {path: 'login', component: LoginComponent},
   {path: 'register', component: RegisterComponent},
-  {path: 'logout', component: LogoutComponent},
-  {path: 'main', component: MainComponent}
+  {path: 'logout', component: LogoutComponent, canActivate: [AuthGuardService]},
+  {path: 'toolBar', component: NavigationComponent, canActivate: [AuthGuardService]}
 ];
 
 @NgModule({

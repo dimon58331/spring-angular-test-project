@@ -25,7 +25,7 @@ export class LoginComponent{
     });
 
     if (this.tokenStorage.getUser()){
-      this.router.navigate(['/']);
+      this.router.navigate(['/main']);
     }
   }
 
@@ -40,7 +40,8 @@ export class LoginComponent{
       this.tokenStorage.saveUser(value);
 
       this.notificationService.showSnackBar('Successfully logged in');
-      this.router.navigate(['/']);
+      // this.router.navigate(['/']);
+      // window.location.reload();
     }, error => {
       console.log(error);
       let errorMessage = error.error.username + ' or ' + error.error.password;
