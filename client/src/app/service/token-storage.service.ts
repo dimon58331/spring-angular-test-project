@@ -30,8 +30,10 @@ export class TokenStorageService {
     return JSON.parse(sessionStorage.getItem(USER_KEY));
   }
 
-  logOut():void{
+  logOut(message: string):void{
     window.sessionStorage.clear();
+    sessionStorage.setItem('reloadAfterPageLoad', 'true');
+    sessionStorage.setItem('notification-message', message);
     window.location.reload();
   }
 }

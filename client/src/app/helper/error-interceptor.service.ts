@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import {
   HTTP_INTERCEPTORS,
-  HttpErrorResponse,
   HttpEvent,
   HttpHandler,
   HttpInterceptor,
@@ -9,7 +8,7 @@ import {
 } from "@angular/common/http";
 import {TokenStorageService} from "../service/token-storage.service";
 import {NotificationService} from "../service/notification.service";
-import {catchError, Observable, throwError, throwIfEmpty} from "rxjs";
+import {catchError, Observable, throwError} from "rxjs";
 
 @Injectable({
   providedIn: 'root'
@@ -23,9 +22,8 @@ export class ErrorInterceptorService implements HttpInterceptor{
     console.log('check request on errors');
     return next.handle(req).pipe(catchError(err => {
       if (err.status === 401){
-        console.log(err)
+        this.tokenService.logOut(err.error.message);
       }
-      this.notificationService.showSnackBar(err.error.username + '\n' + err.error.password);
       return throwError(err);
     }));
   }

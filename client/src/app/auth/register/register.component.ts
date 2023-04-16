@@ -54,11 +54,11 @@ export class RegisterComponent {
 
       this.notificationService.showSnackBar(value.message);
       this.router.navigate(['/login']);
-      window.location.reload();
     }, error => {
       console.log(error);
-      this.notificationService.showSnackBar('Incorrect data!');
-      // it should make in validator for all fields
+      sessionStorage.setItem('reloadAfterPageLoad', 'true');
+      sessionStorage.setItem('notification-message', 'Incorrect data!');
+      window.location.reload();
     })
   }
 

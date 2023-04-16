@@ -5,7 +5,7 @@ import lombok.Data;
 
 @Data
 public class CommentDTO {
-    @NotEmpty
+
     private String username;
     @NotEmpty
     private String message;

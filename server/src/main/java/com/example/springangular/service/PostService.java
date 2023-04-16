@@ -55,13 +55,13 @@ public class PostService {
     public Post likePost(Long postId, String username){
         Post post = postRepository.findById(postId)
                 .orElseThrow(() -> new PostNotFoundException("Post with this postId not found!"));
-        Optional<String> usernameLiked = post.getLikedUsers().stream().filter(s -> s.equals(username)).findAny();
+        Optional<String> usernameLiked = post.getLikedUsers().stream().filter(s -> s.equals(username)).findFirst();
         if (usernameLiked.isEmpty()){
             post.setLikes(post.getLikes() + 1);
-            post.getLikedUsers().remove(username);
+            post.getLikedUsers().add(username);
         }else {
             post.setLikes(post.getLikes() - 1);
-            post.getLikedUsers().add(username);
+            post.getLikedUsers().remove(username);
         }
         return postRepository.save(post);
     }

@@ -5,6 +5,7 @@ import {TokenStorageService} from "../../service/token-storage.service";
 import {Router} from "@angular/router";
 import {NotificationService} from "../../service/notification.service";
 
+
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -39,13 +40,13 @@ export class LoginComponent{
       this.tokenStorage.saveToken(value.token);
       this.tokenStorage.saveUser(value);
 
+      this.router.navigate(['/main']);
       this.notificationService.showSnackBar('Successfully logged in');
-      // this.router.navigate(['/']);
-      // window.location.reload();
     }, error => {
       console.log(error);
-      let errorMessage = error.error.username + ' or ' + error.error.password;
-      this.notificationService.showSnackBar(errorMessage);
+      sessionStorage.setItem('reloadAfterPageLoad', 'true');
+      sessionStorage.setItem('notification-message', 'Invalid username or password!');
+      window.location.reload();
     })
   }
 }

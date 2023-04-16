@@ -1,6 +1,7 @@
 package com.example.springangular.config;
 
 import com.auth0.jwt.exceptions.JWTVerificationException;
+import com.example.springangular.payload.response.InvalidLoginResponse;
 import com.example.springangular.security.PersonDetails;
 import com.example.springangular.service.PersonDetailsService;
 import com.example.springangular.util.JWTUtil;
@@ -11,6 +12,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
@@ -53,6 +55,8 @@ public class JWTFilter extends OncePerRequestFilter {
 
             } catch (JWTVerificationException exception){
                 LOG.atError().log("JWT token isn't valid");
+                response.sendError(HttpStatus.UNAUTHORIZED.value(), "JWT token isn't valid");
+                return;
             }
         }
 
