@@ -41,12 +41,14 @@ export class LoginComponent{
       this.tokenStorage.saveUser(value);
 
       this.router.navigate(['/main']);
-      this.notificationService.showSnackBar('Successfully logged in');
+      sessionStorage.setItem('reloadAfterPageLoad', 'true');
+      sessionStorage.setItem('notification-message', 'Successfully logged in');
+      window.location.reload();
     }, error => {
       console.log(error);
       sessionStorage.setItem('reloadAfterPageLoad', 'true');
       sessionStorage.setItem('notification-message', 'Invalid username or password!');
       window.location.reload();
-    })
+    });
   }
 }

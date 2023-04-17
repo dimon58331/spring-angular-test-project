@@ -59,7 +59,7 @@ export class RegisterComponent {
       sessionStorage.setItem('reloadAfterPageLoad', 'true');
       sessionStorage.setItem('notification-message', 'Incorrect data!');
       window.location.reload();
-    })
+    });
   }
 
 }

@@ -75,7 +75,7 @@ public class PostService {
     }
 
     public List<Post> findAllPosts(){
-        return  postRepository.findAll();
+        return  postRepository.findAllByOrderByCreatedDateDesc();
     }
 
     private Person getPersonByPrincipal(Principal principal){

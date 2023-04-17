@@ -4,17 +4,21 @@ import {LoginComponent} from "./auth/login/login.component";
 import {RegisterComponent} from "./auth/register/register.component";
 import {AuthGuardService} from "./helper/auth-guard.service";
 import {IndexComponent} from "./layout/index/index.component";
-import {NavigationComponent} from "./layout/navigation/navigation.component";
+import {ProfileComponent} from "./user/profile/profile.component";
+import {UserPostsComponent} from "./user/user-posts/user-posts.component";
+import {AddPostComponent} from "./user/add-post/add-post.component";
 
-const navigationRoutes: Routes = [
-  {path: '', component: NavigationComponent}
+const profileRoutes: Routes = [
+  {path: '', component: UserPostsComponent, canActivate: [AuthGuardService]},
+  {path: 'add', component: AddPostComponent, canActivate: [AuthGuardService]}
 ];
 
 const routes: Routes = [
   {path: 'login', component: LoginComponent},
   {path: 'register', component: RegisterComponent},
-  {path: 'main', component: IndexComponent, canActivate: [AuthGuardService], children: navigationRoutes},
-  {path: '', redirectTo: 'main', pathMatch: 'full'}
+  {path: 'main', component: IndexComponent, canActivate: [AuthGuardService]},
+  {path: 'profile', component: ProfileComponent, canActivate: [AuthGuardService], children: profileRoutes},
+  {path: '**', redirectTo: 'main', pathMatch: 'full'}
 ];
 
 @NgModule({

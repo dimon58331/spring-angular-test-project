@@ -28,7 +28,7 @@ export class NavigationComponent implements OnInit{
         .subscribe(value => {
           this.user = value;
           this.isDataLoaded = true;
-        })
+        });
     }
   }
 

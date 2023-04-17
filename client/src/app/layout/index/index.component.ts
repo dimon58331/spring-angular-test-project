@@ -66,7 +66,7 @@ export class IndexComponent implements OnInit{
       this.commentService.getCommentsToPost(post.id)
           .subscribe(value => {
             post.comments = value;
-          })
+          });
     });
   }
 
