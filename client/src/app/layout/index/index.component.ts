@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {Post} from "../../models/Post";
 import {User} from "../../models/User";
 import {PostService} from "../../service/post.service";
@@ -98,7 +98,6 @@ export class IndexComponent implements OnInit{
   postComment(message: string | null, postId: number | undefined, postIndex: number): void {
     const post = this.posts[postIndex];
     console.log(post);
-
     // @ts-ignore
     this.commentService.addCommentToPost(postId, message)
       .subscribe(value => {

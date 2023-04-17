@@ -1,1 +1,26 @@
-<p>edit-user works!</p>
+<div class="edit-user">
+  <h2>Edit user profile</h2>
+  <form [formGroup]="profileEditForm">
+    <mat-form-field class="w-100" appearance="outline">
+      <mat-label>Name</mat-label>
+      <input matInput formControlName="name">
+    </mat-form-field>
+    <mat-form-field class="w-100" appearance="outline">
+      <mat-label>Surname</mat-label>
+      <input matInput formControlName="surname">
+    </mat-form-field>
+    <mat-form-field class="w-100" appearance="outline">
+      <mat-label>Bio</mat-label>
+      <input matInput formControlName="bio">
+    </mat-form-field>
+
+    <div class="row">
+      <button (click)="closeDialog()" class="w-50" mat-button mat-dialog-close="" disableRipple>
+        Cancel
+      </button>
+      <button color="primary" class="w-50" [disabled]="profileEditForm.invalid" (click)="submit()" mat-button disableRipple>
+        Update
+      </button>
+    </div>
+  </form>
+</div>

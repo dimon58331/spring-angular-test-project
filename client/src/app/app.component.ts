@@ -7,6 +7,7 @@ import {NotificationService} from "./service/notification.service";
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
+  title = 'title';
   constructor(private notificationService: NotificationService) {
     if (sessionStorage.getItem('reloadAfterPageLoad') === 'true'){
       if (sessionStorage.getItem('notification-message')){

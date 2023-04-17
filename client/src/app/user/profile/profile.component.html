@@ -1,10 +1,6 @@
 <div *ngIf="isUserDataLoaded" class="user-profile">
 
   <h1>Profile</h1>
-  <div style="text-align: right">
-    <button mat-flat-button color="primary" (click)="openEditDialog()">Edit info</button>
-  </div>
-
   <div style="padding-top: 2rem" class="row">
     <div class="col">
       <img class="profile-image" [src]="previewImgURL || formatImage(userProfileImage) ||
@@ -18,7 +14,25 @@
       <h3 style="font-style: italic">{{user.name}} {{user.surname}}</h3>
       <p>{{user.bio}}</p>
     </div>
-    <mat-divider style="margin: 2rem 0"></mat-divider>
-    <router-outlet></router-outlet>
   </div>
+
+  <div>
+    <mat-divider style="margin-top: 1rem"></mat-divider>
+  </div>
+
+  <div class="my-button">
+    <div style="margin-right: 1rem">
+      <button mat-flat-button color="primary" (click)="openEditDialog()">Edit info</button>
+    </div>
+    <div style="margin-left: 1rem">
+      <button mat-flat-button color="primary" routerLink="add">Add post</button>
+    </div>
+  </div>
+
+  <div>
+    <mat-divider style="margin-bottom: 1rem"></mat-divider>
+  </div>
+
+  <router-outlet></router-outlet>
+
 </div>
