@@ -15,8 +15,7 @@ export class NavigationComponent implements OnInit{
   public isDataLoaded = false;
   constructor(
     private tokenService: TokenStorageService,
-    private userService: UserService,
-    private router: Router) {
+    private userService: UserService) {
     // @ts-ignore
     this.user = null;
   }

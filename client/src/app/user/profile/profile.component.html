@@ -4,7 +4,7 @@
   <div style="padding-top: 2rem" class="row">
     <div class="col">
       <img class="profile-image" [src]="previewImgURL || formatImage(userProfileImage) ||
-      'https://sun6-22.userapi.com/s/v1/ig2/n4pw1iQqdhFBlazVj73cQZEHi0_UWQlNDa3V5UHBcun12GU1N1OZdTUrF6CoP-oVYgbNgEEG_l8wnwueSubPr907.jpg?size=900x900&quality=96&crop=0,0,900,900&ava=1'">
+      'https://nahes-group-space.storage.yandexcloud.net/acropolis/static/img/nonePhoto.png'">
       <input type="file" style="display: none" #fileInput (change)="onFileSelected($any($event))">
       <button mat-button (click)="fileInput.click()">Pick file</button>
       <button mat-button *ngIf="selectedFile" (click)="onUpload()">Upload</button>
@@ -25,7 +25,7 @@
       <button mat-flat-button color="primary" (click)="openEditDialog()">Edit info</button>
     </div>
     <div style="margin-left: 1rem">
-      <button mat-flat-button color="primary" routerLink="add">Add post</button>
+      <button mat-flat-button color="primary" (click)="openAddPostDialog()">Add post</button>
     </div>
   </div>
 

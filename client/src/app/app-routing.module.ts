@@ -9,8 +9,7 @@ import {UserPostsComponent} from "./user/user-posts/user-posts.component";
 import {AddPostComponent} from "./user/add-post/add-post.component";
 
 const profileRoutes: Routes = [
-  {path: '', component: UserPostsComponent, canActivate: [AuthGuardService]},
-  {path: 'add', component: AddPostComponent, canActivate: [AuthGuardService]}
+  {path: '', component: UserPostsComponent, canActivate: [AuthGuardService]}
 ];
 
 const routes: Routes = [

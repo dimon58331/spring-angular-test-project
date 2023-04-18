@@ -7,6 +7,8 @@ import {NotificationService} from "../../service/notification.service";
 import {ImageUploadService} from "../../service/image-upload.service";
 import {UserService} from "../../service/user.service";
 import {EditUserComponent} from "../edit-user/edit-user.component";
+import {Post} from "../../models/Post";
+import {AddPostComponent} from "../add-post/add-post.component";
 
 @Component({
   selector: 'app-profile',
@@ -17,6 +19,8 @@ export class ProfileComponent implements OnInit{
   isUserDataLoaded = false;
   // @ts-ignore
   user: User;
+  // @ts-ignore
+  post: Post = {};
   // @ts-ignore
   selectedFile: File;
   // @ts-ignore
@@ -59,6 +63,15 @@ export class ProfileComponent implements OnInit{
       user: this.user
     }
     this.dialog.open(EditUserComponent, dialogUserEditConfig);
+  }
+
+  openAddPostDialog(): void {
+    const dialogCreatePostConfig = new MatDialogConfig();
+    dialogCreatePostConfig.width = '500px';
+    dialogCreatePostConfig.data = {
+      post: this.post
+    }
+    this.dialog.open(AddPostComponent, dialogCreatePostConfig);
   }
 
   formatImage(img: any): any {

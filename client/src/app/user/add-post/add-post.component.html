@@ -1,1 +1,34 @@
-<p>add-post works!</p>
+<div class="create-post">
+  <h2>Create post</h2>
+  <form [formGroup]="postForm">
+    <mat-form-field class="w-100" appearance="outline">
+      <mat-label>Title</mat-label>
+      <input matInput formControlName="title">
+    </mat-form-field>
+    <mat-form-field class="w-100" appearance="outline">
+      <mat-label>Caption</mat-label>
+      <input matInput formControlName="description">
+    </mat-form-field>
+    <mat-form-field class="w-100" appearance="outline">
+      <mat-label>Location</mat-label>
+      <input matInput formControlName="location">
+    </mat-form-field>
+
+    <div class="image-components">
+      <img class="post-image" [src]="previewImgURL ||
+      'https://nahes-group-space.storage.yandexcloud.net/acropolis/static/img/nonePhoto.png'">
+      <input type="file" style="display: none" #fileInput (change)="onFileSelected($any($event))">
+      <button mat-button *ngIf="!fileIsLoaded" (click)="fileInput.click()">Pick file</button>
+      <button mat-button *ngIf="selectedFile && !fileIsLoaded" (click)="onUpload()">Upload</button>
+    </div>
+
+    <div class="row">
+      <button (click)="closeDialog()" class="w-50" mat-button mat-dialog-close="" disableRipple>
+        Cancel
+      </button>
+      <button color="primary" class="w-50" [disabled]="postForm.invalid" (click)="submit()" mat-button disableRipple>
+        Create
+      </button>
+    </div>
+  </form>
+</div>
