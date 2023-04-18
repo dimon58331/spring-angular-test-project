@@ -1,4 +1,5 @@
 import {Comment} from "./Comment";
+import {User} from "./User";
 
 export interface Post{
   id?:number;
@@ -9,5 +10,5 @@ export interface Post{
   likes?:number;
   likedUsers?:string[];
   comments?: Comment[];
-  username?:string;
+  person: User;
 }

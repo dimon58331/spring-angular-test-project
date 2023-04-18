@@ -50,8 +50,12 @@ export class AddPostComponent {
           .subscribe(imageDate => {
             console.log(imageDate);
           });
-        this.notificationService.showSnackBar("Post created successfully!");
         this.dialogMat.close();
+
+        sessionStorage.setItem('reloadAfterPageLoad', 'true');
+        sessionStorage.setItem('notification-message', 'Post created successfully!');
+        window.location.reload();
+
       });
   }
 

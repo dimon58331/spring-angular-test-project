@@ -1,6 +1,3 @@
-<div>
-  <router-outlet></router-outlet>
-</div>
 <div *ngIf="isPostsLoaded && isUserLoaded" class="index-page">
   <mat-card class="post-card" *ngFor="let post of posts; let i = index">
     <mat-card-header style="text-align: left">
@@ -9,7 +6,7 @@
       <mat-card-subtitle>{{post.location}}</mat-card-subtitle>
     </mat-card-header>
     <img mat-card-image [src]="formatImage(post.image)" alt="post image" class="post-image"/>
-    <mat-card-subtitle align="start">Posted by {{user.username}}</mat-card-subtitle>
+    <mat-card-subtitle align="start">Posted by {{post.person.username}}</mat-card-subtitle>
     <mat-card-content>
       <p>{{post.description}}</p>
     </mat-card-content>

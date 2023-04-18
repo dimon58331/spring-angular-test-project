@@ -1,5 +1,6 @@
 package com.example.springangular.dto;
 
+import com.example.springangular.entity.Person;
 import jakarta.validation.constraints.NotEmpty;
 import lombok.Data;
 
@@ -15,4 +16,5 @@ public class PostDTO {
     @NotEmpty
     private String location;
     private Set<String> likedUsers;
+    private PersonDTO person;
 }
